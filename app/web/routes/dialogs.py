@@ -53,10 +53,14 @@ def send_reply(dialog_id):
             await MessageService.process_manager_reply(dialog_id, text)
             
             bot = Bot(token=BOT_TOKENS.get(dialog.bot_name))
-            await bot.send_message(
-                chat_id=int(dialog.user.telegram_id),
-                text=f"Ответ менеджера:\n\n{text}"
-            )
+            
+            try:
+                await bot.send_message(
+                    chat_id=int(dialog.user.telegram_id),
+                    text=f"Ответ менеджера:\n\n{text}"
+                )
+            finally:
+                await bot.session.close()
     
     asyncio.run(process_reply())
     return jsonify({"status": "success"})

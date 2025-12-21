@@ -14,6 +14,8 @@ class MessageService:
             
             if dialog.status == "закрыто":
                 await update_dialog_status(session, dialog.id, "новое")
+            elif dialog.status == "новое":
+                await update_dialog_status(session, dialog.id, "в работе")
             
             message = await create_message(session, dialog.id, text, True, telegram_message_id)
             

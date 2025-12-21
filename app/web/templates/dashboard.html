@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -29,7 +28,7 @@
                 <a href="{{ url_for('dialogs.dialog_view', dialog_id=dialog.id) }}" class="dialog-item" data-status="{{ dialog.status }}">
                     <div class="dialog-header">
                         <span class="user-name">{{ dialog.user.first_name }} {{ dialog.user.last_name }}</span>
-                        <span class="status status-{{ dialog.status }}">{{ dialog.status }}</span>
+                        <span class="status {% if dialog.status == 'новое' %}status-новое{% elif dialog.status == 'в работе' %}status-в-работе{% else %}status-закрыто{% endif %}">{{ dialog.status }}</span>
                     </div>
                     <div class="dialog-info">
                         <span class="bot-name">Бот: {{ dialog.bot_name }}</span>

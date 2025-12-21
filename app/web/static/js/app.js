@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
 			if (response.ok) {
 				alert('Статус оновлено');
+				location.reload();
 			}
 		});
 	}
