@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Діалоги - Система обробки повідомлень</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>Система обробки повідомлень</h1>
+            <a href="{{ url_for('auth.logout') }}" class="logout-btn">Вийти</a>
+        </header>
+        
+        <div class="dialogs-container">
+            <h2>Список діалогів</h2>
+            
+            <div class="filters">
+                <button class="filter-btn active" data-status="all">Всі</button>
+                <button class="filter-btn" data-status="новое">Нові</button>
+                <button class="filter-btn" data-status="в работе">В роботі</button>
+                <button class="filter-btn" data-status="закрыто">Закриті</button>
+            </div>
+            
+            <div class="dialogs-list">
+                {% for dialog in dialogs %}
+                <a href="{{ url_for('dialogs.dialog_view', dialog_id=dialog.id) }}" class="dialog-item" data-status="{{ dialog.status }}">
+                    <div class="dialog-header">
+                        <span class="user-name">{{ dialog.user.first_name }} {{ dialog.user.last_name }}</span>
+                        <span class="status status-{{ dialog.status }}">{{ dialog.status }}</span>
+                    </div>
+                    <div class="dialog-info">
+                        <span class="bot-name">Бот: {{ dialog.bot_name }}</span>
+                        <span class="time">{{ dialog.updated_at.strftime('%d.%m.%Y %H:%M') }}</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

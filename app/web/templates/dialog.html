@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Діалог - Система обробки повідомлень</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="dialog-page">
+        <header>
+            <a href="{{ url_for('dialogs.dashboard') }}" class="back-btn">← Назад</a>
+            <h1>Діалог з {{ dialog.user.first_name }} {{ dialog.user.last_name }}</h1>
+            <a href="{{ url_for('auth.logout') }}" class="logout-btn">Вийти</a>
+        </header>
+        
+        <div class="dialog-container">
+            <div class="dialog-sidebar">
+                <div class="user-info">
+                    <h3>Інформація</h3>
+                    {% if dialog.user %}
+                    <p><strong>Користувач:</strong> @{{ dialog.user.username or 'без username' }}</p>
+                    <p><strong>Telegram ID:</strong> {{ dialog.user.telegram_id }}</p>
+                    {% endif %}
+                    <p><strong>Бот:</strong> {{ dialog.bot_name }}</p>
+                    <p><strong>Створено:</strong> {{ dialog.created_at.strftime('%d.%m.%Y %H:%M') }}</p>
+                </div>
+                
+                <div class="status-control">
+                    <h3>Статус</h3>
+                    <select id="status-select" data-dialog-id="{{ dialog.id }}">
+                        <option value="новое" {% if dialog.status == 'новое' %}selected{% endif %}>Новий</option>
+                        <option value="в работе" {% if dialog.status == 'в работе' %}selected{% endif %}>В роботі</option>
+                        <option value="закрыто" {% if dialog.status == 'закрыто' %}selected{% endif %}>Закритий</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="messages-area">
+                <div class="messages-list" id="messages-list">
+                    {% for message in messages %}
+                    <div class="message {% if message.is_from_user %}message-user{% else %}message-manager{% endif %}">
+                        <div class="message-content">
+                            <p>{{ message.text }}</p>
+                        </div>
+                        <div class="message-time">{{ message.created_at.strftime('%d.%m.%Y %H:%M') }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="reply-form">
+                    <textarea id="reply-text" placeholder="Введіть відповідь..."></textarea>
+                    <button id="send-reply" data-dialog-id="{{ dialog.id }}">Відправити</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
