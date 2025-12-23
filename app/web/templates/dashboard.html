@@ -5,34 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Діалоги - Система обробки повідомлень</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <div class="dashboard">
         <header>
-            <h1>Система обробки повідомлень</h1>
-            <a href="{{ url_for('auth.logout') }}" class="logout-btn">Вийти</a>
+            <h1><i class="fas fa-comments"></i> Система обробки повідомлень</h1>
+            <a href="{{ url_for('auth.logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Вийти</a>
         </header>
         
         <div class="dialogs-container">
-            <h2>Список діалогів</h2>
-            
+            <h2><i class="fas fa-inbox"></i> Список діалогів</h2>
+
             <div class="filters">
-                <button class="filter-btn active" data-status="all">Всі</button>
-                <button class="filter-btn" data-status="новое">Нові</button>
-                <button class="filter-btn" data-status="в работе">В роботі</button>
-                <button class="filter-btn" data-status="закрыто">Закриті</button>
+                <button class="filter-btn active" data-status="all"><i class="fas fa-th-large"></i> Всі</button>
+                <button class="filter-btn" data-status="новое"><i class="fas fa-star"></i> Нові</button>
+                <button class="filter-btn" data-status="в работе"><i class="fas fa-spinner"></i> В роботі</button>
+                <button class="filter-btn" data-status="закрыто"><i class="fas fa-check-circle"></i> Закриті</button>
             </div>
             
             <div class="dialogs-list">
                 {% for dialog in dialogs %}
                 <a href="{{ url_for('dialogs.dialog_view', dialog_id=dialog.id) }}" class="dialog-item" data-status="{{ dialog.status }}">
                     <div class="dialog-header">
-                        <span class="user-name">{{ dialog.user.first_name }} {{ dialog.user.last_name }}</span>
+                        <span class="user-name"><i class="fas fa-user-circle"></i> {{ dialog.user.first_name }} {{ dialog.user.last_name }}</span>
                         <span class="status {% if dialog.status == 'новое' %}status-новое{% elif dialog.status == 'в работе' %}status-в-работе{% else %}status-закрыто{% endif %}">{{ dialog.status }}</span>
                     </div>
                     <div class="dialog-info">
-                        <span class="bot-name">Бот: {{ dialog.bot_name }}</span>
-                        <span class="time">{{ dialog.updated_at.strftime('%d.%m.%Y %H:%M') }}</span>
+                        <span class="bot-name"><i class="fas fa-robot"></i> Бот: {{ dialog.bot_name }}</span>
+                        <span class="time"><i class="far fa-clock"></i> {{ dialog.updated_at.strftime('%d.%m.%Y %H:%M') }}</span>
                     </div>
                 </a>
                 {% endfor %}

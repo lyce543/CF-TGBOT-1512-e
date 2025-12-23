@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вхід - Система обробки повідомлень</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <div class="login-container">
         <div class="login-box">
-            <h1>Вхід в систему</h1>
+            <h1><i class="fas fa-lock"></i> Вхід в систему</h1>
             {% if error %}
-            <div class="error">{{ error }}</div>
+            <div class="error"><i class="fas fa-exclamation-circle"></i> {{ error }}</div>
             {% endif %}
             <form method="POST">
                 <div class="form-group">
-                    <label>Логін:</label>
-                    <input type="text" name="username" required>
+                    <label><i class="fas fa-user"></i> Логін:</label>
+                    <input type="text" name="username" required placeholder="Введіть логін">
                 </div>
                 <div class="form-group">
-                    <label>Пароль:</label>
-                    <input type="password" name="password" required>
+                    <label><i class="fas fa-key"></i> Пароль:</label>
+                    <input type="password" name="password" required placeholder="Введіть пароль">
                 </div>
-                <button type="submit">Увійти</button>
+                <button type="submit"><i class="fas fa-sign-in-alt"></i> Увійти</button>
             </form>
         </div>
     </div>
