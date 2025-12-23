@@ -6,8 +6,10 @@
 
 body {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-	background: #f5f5f5;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	background-attachment: fixed;
 	color: #333;
+	min-height: 100vh;
 }
 
 .login-container {
@@ -18,17 +20,33 @@ body {
 }
 
 .login-box {
-	background: white;
-	padding: 40px;
-	border-radius: 8px;
-	box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(10px);
+	padding: 50px 40px;
+	border-radius: 20px;
+	box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 	width: 100%;
-	max-width: 400px;
+	max-width: 420px;
+	animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .login-box h1 {
-	margin-bottom: 30px;
+	margin-bottom: 35px;
 	text-align: center;
+	color: #667eea;
+	font-size: 32px;
+	font-weight: 700;
 }
 
 .form-group {
@@ -37,40 +55,67 @@ body {
 
 .form-group label {
 	display: block;
-	margin-bottom: 8px;
-	font-weight: 500;
+	margin-bottom: 10px;
+	font-weight: 600;
+	color: #555;
+	font-size: 14px;
 }
 
 .form-group input {
 	width: 100%;
-	padding: 12px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	font-size: 14px;
+	padding: 14px 16px;
+	border: 2px solid #e0e0e0;
+	border-radius: 10px;
+	font-size: 15px;
+	transition: all 0.3s ease;
+	background: #f8f9fa;
+}
+
+.form-group input:focus {
+	outline: none;
+	border-color: #667eea;
+	background: white;
+	box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
 }
 
 button {
 	width: 100%;
-	padding: 12px;
-	background: #007bff;
+	padding: 14px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	color: white;
 	border: none;
-	border-radius: 4px;
+	border-radius: 10px;
 	cursor: pointer;
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 600;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 button:hover {
-	background: #0056b3;
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+button:active {
+	transform: translateY(0);
 }
 
 .error {
-	background: #f8d7da;
-	color: #721c24;
-	padding: 12px;
-	border-radius: 4px;
+	background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+	color: white;
+	padding: 14px 18px;
+	border-radius: 10px;
 	margin-bottom: 20px;
+	box-shadow: 0 4px 15px rgba(238, 90, 111, 0.3);
+	font-weight: 500;
+	animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+	0%, 100% { transform: translateX(0); }
+	25% { transform: translateX(-10px); }
+	75% { transform: translateX(10px); }
 }
 
 .dashboard {
@@ -78,28 +123,50 @@ button:hover {
 }
 
 header {
-	background: white;
-	padding: 20px;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(10px);
+	padding: 24px 40px;
+	box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	position: sticky;
+	top: 0;
+	z-index: 100;
 }
 
 header h1 {
-	font-size: 24px;
+	font-size: 26px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	font-weight: 700;
 }
 
 .logout-btn, .back-btn {
-	padding: 8px 16px;
-	background: #dc3545;
+	padding: 10px 20px;
+	background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
 	color: white;
 	text-decoration: none;
-	border-radius: 4px;
+	border-radius: 10px;
+	font-weight: 600;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(238, 90, 111, 0.3);
+}
+
+.logout-btn:hover, .back-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(238, 90, 111, 0.5);
 }
 
 .back-btn {
-	background: #6c757d;
+	background: linear-gradient(135deg, #868e96 0%, #6c757d 100%);
+	box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.back-btn:hover {
+	box-shadow: 0 6px 20px rgba(108, 117, 125, 0.5);
 }
 
 .dialogs-container {
@@ -109,44 +176,64 @@ header h1 {
 }
 
 .dialogs-container h2 {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
+	color: white;
+	font-size: 32px;
+	font-weight: 700;
+	text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 .filters {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	display: flex;
-	gap: 10px;
+	gap: 12px;
+	flex-wrap: wrap;
 }
 
 .filter-btn {
 	width: auto;
-	padding: 8px 16px;
-	background: #e9ecef;
-	color: #333;
+	padding: 10px 24px;
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(10px);
+	color: white;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	font-weight: 600;
+}
+
+.filter-btn:hover {
+	background: rgba(255, 255, 255, 0.3);
+	border-color: rgba(255, 255, 255, 0.5);
 }
 
 .filter-btn.active {
-	background: #007bff;
-	color: white;
+	background: rgba(255, 255, 255, 0.95);
+	color: #667eea;
+	border-color: white;
+	box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
 .dialogs-list {
 	display: grid;
-	gap: 15px;
+	gap: 20px;
 }
 
 .dialog-item {
-	background: white;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(10px);
+	padding: 24px;
+	border-radius: 16px;
+	box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 	text-decoration: none;
 	color: inherit;
 	display: block;
+	transition: all 0.3s ease;
+	border: 2px solid transparent;
 }
 
 .dialog-item:hover {
-	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+	transform: translateY(-4px);
+	box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+	border-color: rgba(102, 126, 234, 0.3);
 }
 
 .dialog-header {
@@ -157,29 +244,33 @@ header h1 {
 }
 
 .user-name {
-	font-weight: 600;
-	font-size: 18px;
+	font-weight: 700;
+	font-size: 20px;
+	color: #333;
 }
 
 .status {
-	padding: 4px 12px;
-	border-radius: 12px;
-	font-size: 12px;
-	font-weight: 500;
+	padding: 6px 16px;
+	border-radius: 20px;
+	font-size: 13px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .status-новое {
-	background: #fff3cd;
+	background: linear-gradient(135deg, #ffd93d 0%, #ffb800 100%);
 	color: #856404;
 }
 
 .status-в-работе {
-	background: #d1ecf1;
-	color: #0c5460;
+	background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+	color: white;
 }
 
 .status-закрыто {
-	background: #d4edda;
+	background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
 	color: #155724;
 }
 
@@ -188,6 +279,12 @@ header h1 {
 	justify-content: space-between;
 	color: #6c757d;
 	font-size: 14px;
+	font-weight: 500;
+}
+
+.dialog-info .bot-name {
+	color: #667eea;
+	font-weight: 600;
 }
 
 .dialog-page {
@@ -208,52 +305,109 @@ header h1 {
 
 .dialog-sidebar {
 	width: 300px;
-	background: white;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(10px);
+	padding: 24px;
+	border-radius: 16px;
+	box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 	height: fit-content;
 }
 
 .dialog-sidebar h3 {
-	margin-bottom: 15px;
+	margin-bottom: 18px;
+	color: #667eea;
+	font-size: 18px;
+	font-weight: 700;
 }
 
 .user-info p {
-	margin-bottom: 10px;
+	margin-bottom: 12px;
+	color: #555;
+	font-size: 14px;
+}
+
+.user-info p strong {
+	color: #333;
+	font-weight: 600;
 }
 
 .status-control {
 	margin-top: 30px;
+	padding-top: 20px;
+	border-top: 2px solid #f0f0f0;
 }
 
 .status-control select {
 	width: 100%;
-	padding: 10px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
+	padding: 12px 14px;
+	border: 2px solid #e0e0e0;
+	border-radius: 10px;
 	font-size: 14px;
+	background: #f8f9fa;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-weight: 500;
+}
+
+.status-control select:focus {
+	outline: none;
+	border-color: #667eea;
+	background: white;
+	box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
 }
 
 .messages-area {
 	flex: 1;
-	background: white;
-	border-radius: 8px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(10px);
+	border-radius: 16px;
+	box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 }
 
 .messages-list {
 	flex: 1;
-	padding: 20px;
+	padding: 24px;
 	overflow-y: auto;
 	max-height: calc(100vh - 300px);
+	background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+}
+
+.messages-list::-webkit-scrollbar {
+	width: 8px;
+}
+
+.messages-list::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 10px;
+}
+
+.messages-list::-webkit-scrollbar-thumb {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	border-radius: 10px;
+}
+
+.messages-list::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
 
 .message {
-	margin-bottom: 20px;
+	margin-bottom: 24px;
 	max-width: 70%;
+	animation: messageSlide 0.3s ease-out;
+}
+
+@keyframes messageSlide {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .message-user {
@@ -265,42 +419,59 @@ header h1 {
 }
 
 .message-content {
-	padding: 12px 16px;
-	border-radius: 12px;
-	background: #007bff;
+	padding: 14px 18px;
+	border-radius: 18px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	color: white;
+	box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+	font-size: 15px;
+	line-height: 1.5;
 }
 
 .message-user .message-content {
-	background: #e9ecef;
+	background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 	color: #333;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .message-time {
 	font-size: 12px;
 	color: #6c757d;
-	margin-top: 4px;
-	padding: 0 8px;
+	margin-top: 6px;
+	padding: 0 10px;
+	font-weight: 500;
 }
 
 .reply-form {
-	padding: 20px;
-	border-top: 1px solid #e9ecef;
+	padding: 24px;
+	border-top: 2px solid #f0f0f0;
 	display: flex;
-	gap: 10px;
+	gap: 12px;
+	background: white;
 }
 
 .reply-form textarea {
 	flex: 1;
-	padding: 12px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
+	padding: 14px 16px;
+	border: 2px solid #e0e0e0;
+	border-radius: 12px;
 	resize: vertical;
 	min-height: 60px;
 	font-family: inherit;
+	font-size: 15px;
+	transition: all 0.3s ease;
+	background: #f8f9fa;
+}
+
+.reply-form textarea:focus {
+	outline: none;
+	border-color: #667eea;
+	background: white;
+	box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
 }
 
 .reply-form button {
 	width: auto;
-	padding: 12px 24px;
+	padding: 14px 28px;
+	align-self: flex-end;
 }
